@@ -1,8 +1,51 @@
 import React, { useEffect } from 'react'
-import { Layout } from '../components'
-import { Title, Paragraph, Link } from '../components/styles'
+import { Layout, Main, Header } from '../components'
+import {
+  Title,
+  Paragraph,
+  BlogContainer,
+  BlogTitle,
+  BlogDescription,
+  BlogBottomContainer,
+  BlogEmptyContainer,
+  BlogEmptyText,
+} from '../styles'
+import { getBlogData, dayFromNow } from '../utils'
+import { DataEntry } from '../types/data'
 
-export default () => {
+const EmptyBlog = ({}) => {
+  return (
+    <BlogEmptyContainer>
+      <BlogEmptyText>No blog found</BlogEmptyText>
+    </BlogEmptyContainer>
+  )
+}
+
+const BlogItem = ({ item }: { item: DataEntry }) => {
+  const { Author, Description, Title, Timestamp } = item
+  return (
+    <BlogContainer>
+      <BlogTitle>{Title}</BlogTitle>
+      <BlogDescription>{Description}</BlogDescription>
+      <BlogBottomContainer>
+        <span>{Author}</span>
+        <span>{dayFromNow(Timestamp)}</span>
+      </BlogBottomContainer>
+    </BlogContainer>
+  )
+}
+
+const BlogList = ({ items }: { items: DataEntry }) => {
+  return (
+    <div className="flex flex-wrap mx-auto">
+      {items.map((item: DataEntry, key: number) => (
+        <BlogItem key={key} item={item} />
+      ))}
+    </div>
+  )
+}
+
+export default ({ blogs }: { blogs: DataEntry }) => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
       if ('serviceWorker' in navigator) {
@@ -20,21 +63,19 @@ export default () => {
 
   return (
     <Layout>
-      <Title>Welcome to Next Preact Typescript PWA!</Title>
-
-      <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Quis varius quam
-        quisque id diam. Felis imperdiet proin fermentum leo vel orci porta non.
-        Scelerisque viverra mauris in aliquam
-      </Paragraph>
-
-      <Link
-        href="https://loremipsum.io/"
-      >
-        Lorem ipsum
-      </Link>
-      <style jsx>{``}</style>
+      <Header>
+        <Title>Welcome to Beauop</Title>
+        <Paragraph>Automatic event blog publisher</Paragraph>
+      </Header>
+      <Main>{blogs.length ? <BlogList items={blogs} /> : <EmptyBlog />}</Main>
     </Layout>
   )
+}
+
+export async function getStaticProps({}) {
+  return {
+    props: {
+      blogs: getBlogData(),
+    },
+  }
 }

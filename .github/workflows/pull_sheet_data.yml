@@ -1,0 +1,41 @@
+name: pull googlesheet data
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: googlesheet_actions
+        uses: rjoydip/googlesheet-actions@0.1.1
+        with:
+          sheet-id: ${{ secrets.SHEET_ID }}
+      - uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            let sha = null;
+            const path = "data.json";
+            try {
+                // Get content if path is exists previously
+                const getContents = await github.repos.getContents({
+                    ...context.repo,
+                    path,
+                    ref: "refs/heads/master",
+                });
+                sha = getContents.data.sha;
+            } catch (_) {}
+            github.repos.createOrUpdateFile({
+                ...context.repo,
+                path,
+                message: "Data updateed - commit from github actions",
+                content: Buffer.from(
+                    JSON.stringify(
+                        ${{steps.googlesheet_actions.outputs.result}}
+                    )
+                ).toString("base64"),
+                sha,
+                committer: context.pusher,
+            });
+      

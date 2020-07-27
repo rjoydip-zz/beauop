@@ -1,23 +1,25 @@
 {
-  "name": "next-ts-preact-pwa",
+  "name": "beauop",
   "version": "1.0.0",
   "license": "ISC",
-  "title": "Next Preact Typescript PWA",
+  "title": "Automatic event blog publisher",
   "scripts": {
     "lint": "tsc",
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "pre-deploy": "yarn clean-cache && yarn build-css-prod && yarn lint && yarn build",
-    "clean-cache": "rm -rf .next && rm -rf node_modules/.cache",
+    "clean-cache": "rm -rf .next .vercel *.lock index.css node_modules/.cache",
     "build-css": "postcss tailwind.css -o index.css",
     "build-css-prod": "cross-env NODE_ENV=production postcss tailwind.css -o index.css",
-    "watch-css": "postcss tailwind.css -o index.css -w"
+    "watch-css": "postcss tailwind.css -o index.css -w",
+    "all": "yarn clean-cache && yarn build-css-prod && yarn lint && yarn build"
   },
   "dependencies": {
+    "dayjs": "^1.8.30",
     "next": "latest",
     "preact": "^10.4.1",
     "preact-render-to-string": "^5.1.6",
+    "promise-hook": "^0.1.4",
     "react": "github:preact-compat/react#1.0.0",
     "react-dom": "github:preact-compat/react-dom#1.0.0",
     "react-icons": "^3.10.0",
@@ -40,7 +42,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn && yarn pre-deploy"
+      "pre-commit": "yarn && yarn all"
     }
   }
 }

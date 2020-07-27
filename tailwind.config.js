@@ -1,10 +1,8 @@
-const colors = require('./utils/colors')
-
 module.exports = {
   theme: {
     extend: {
       colors: {
-        ...colors,
+        ...require('./utils/colors'),
       },
       screens: {
         light: { raw: '(prefers-color-scheme: light)' },
@@ -12,20 +10,14 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    function ({ addBase, config }) {
-      addBase({
-        body: {
-          color: config('theme.colors.black'),
-          backgroundColor: config('theme.colors.white'),
-        },
-        '@screen dark': {
-          body: {
-            color: config('theme.colors.white'),
-            backgroundColor: config('theme.colors.black'),
-          },
-        },
-      })
-    },
-  ],
+  plugins: [],
+  purge: {
+    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+    enabled: process.env.NODE_ENV === 'production',
+    content: [
+      './pages/**/*.{ts,tsx,css}',
+      './components/**/*.{ts,tsx,css}',
+      'tailwind.css',
+    ],
+  },
 }

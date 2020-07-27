@@ -18,7 +18,6 @@
 # misc
 .DS_Store
 .vscode
-yarn.lock
 
 # debug
 npm-debug.log*

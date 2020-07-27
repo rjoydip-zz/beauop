@@ -5,7 +5,6 @@ on:
       - master
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Setup
@@ -14,9 +13,8 @@ jobs:
           version: 12.x
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Clean, Lint, Build
+      - name: Install
+        run: yarn
+      - name: Build
         run: |
-          yarn
-          yarn lint
-          yarn build
-      
+          yarn all

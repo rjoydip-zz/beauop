@@ -12,12 +12,7 @@ module.exports = {
   },
   plugins: [],
   purge: {
-    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
     enabled: process.env.NODE_ENV === 'production',
-    content: [
-      './pages/**/*.{ts,tsx,css}',
-      './components/**/*.{ts,tsx,css}',
-      'tailwind.css',
-    ],
+    content: ["./components/**/*.tsx", "./pages/**/*.tsx", "./styles/**/*.ts"],
   },
 }

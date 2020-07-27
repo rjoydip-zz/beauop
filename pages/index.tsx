@@ -22,14 +22,14 @@ const EmptyBlog = ({}) => {
 }
 
 const BlogItem = ({ item }: { item: DataEntry }) => {
-  const { Author, Description, Title, Timestamp } = item
+  const { author, description, title, timestamp } = item
   return (
     <BlogContainer>
-      <BlogTitle>{Title}</BlogTitle>
-      <BlogDescription>{Description}</BlogDescription>
+      <BlogTitle>{title}</BlogTitle>
+      <BlogDescription>{description}</BlogDescription>
       <BlogBottomContainer>
-        <span>{Author}</span>
-        <span>{dayFromNow(Timestamp)}</span>
+        <span>{author}</span>
+        <span>{dayFromNow(timestamp)}</span>
       </BlogBottomContainer>
     </BlogContainer>
   )

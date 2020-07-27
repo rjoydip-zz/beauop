@@ -6,13 +6,13 @@
   "scripts": {
     "lint": "tsc",
     "dev": "next",
-    "build": "next build",
+    "build": "yarn build-css && next build",
     "start": "next start",
     "clean-cache": "rm -rf .next .vercel *.lock index.css node_modules/.cache",
     "build-css": "postcss tailwind.css -o index.css",
     "build-css-prod": "cross-env NODE_ENV=production postcss tailwind.css -o index.css",
     "watch-css": "postcss tailwind.css -o index.css -w",
-    "all": "yarn clean-cache && yarn build-css-prod && yarn lint && yarn build"
+    "all": "yarn clean-cache && yarn lint && yarn build"
   },
   "dependencies": {
     "dayjs": "^1.8.30",

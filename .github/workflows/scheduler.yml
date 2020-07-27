@@ -1,4 +1,4 @@
-name: pull googlesheet data
+name: scheduler
 on:
   schedule:
     - cron: '*/5 * * * *'

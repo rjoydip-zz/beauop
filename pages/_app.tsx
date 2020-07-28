@@ -2,7 +2,7 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
 import pkg from '../package.json'
-import styles from '../index.css'
+import '../styles/app.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <noscript key="noscript">Your browser does not support JavaScript!</noscript>
       </Head>
-      <Component {...styles} {...pageProps} />
+      <Component {...pageProps} />
     </>
   )
 }

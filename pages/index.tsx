@@ -44,8 +44,7 @@ const BlogList = ({ items }: { items: DataEntry }) => {
     </div>
   )
 }
-
-export default ({ blogs }: { blogs: DataEntry }) => {
+const Blog = ({ blogs }: { blogs: DataEntry }) => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
       if ('serviceWorker' in navigator) {
@@ -79,3 +78,5 @@ export async function getStaticProps({}) {
     },
   }
 }
+
+export default Blog;

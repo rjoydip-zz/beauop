@@ -1,11 +1,12 @@
 import { ThemeProps } from 'styled-components'
 
+interface ValueProps {
+  bg: string
+  text: string
+}
+
 export interface props
   extends ThemeProps<{
-    bg: {
-      primary: string
-    }
-    text: {
-      primary: string
-    }
+    default: ValueProps
+    inverse: ValueProps
   }> {}

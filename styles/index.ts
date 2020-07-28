@@ -11,8 +11,8 @@ export const Title = styled.div.attrs({
 
 export const GlobalStyles = createGlobalStyle`
   body {
-    background: ${({ theme }: props) => theme.bg};
-    color: ${({ theme }: props) => theme.text};
+    background: ${({ theme }: props) => theme.default.bg};
+    color: ${({ theme }: props) => theme.default.text};
     transition: all 0.50s linear;
   }
 `

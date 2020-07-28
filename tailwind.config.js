@@ -10,9 +10,9 @@ module.exports = {
       },
     },
   },
-  plugins: [],
   purge: {
     enabled: process.env.NODE_ENV === 'production',
-    content: ["./components/**/*.tsx", "./pages/**/*.tsx", "./styles/**/*.ts"],
+    content: ['./components/**/*.tsx', './pages/**/*.tsx', './styles/**/*.ts'],
+    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
   },
 }
